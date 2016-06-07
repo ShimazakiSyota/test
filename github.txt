@@ -1,4 +1,4 @@
-//ƒeƒXƒg@github@
+﻿//テスト
 https://github.com/ShimazakiSyota/test
 
 https://github.com/ShimazakiSyota/test1.git
