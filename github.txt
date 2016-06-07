@@ -3,5 +3,6 @@ https://github.com/ShimazakiSyota/test
 
 https://github.com/ShimazakiSyota/test1.git
 
+https://github.com/ShimazakiSyota/oshisuta.git
 
 あいうえお
