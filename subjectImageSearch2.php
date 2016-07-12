@@ -3,74 +3,54 @@
 session_start();
 
 ?>
+<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="将来なりたい仕事、決まっていますか？シゴト部では、進路に悩んでいる高校生向けに約200種類のお仕事を分かりやすく紹介！たくさんのお仕事の中からあなたの気になるお仕事を探しましょう！">
+<meta name="keywords" content="シゴト部,仕事,探す,高校生,学校,IT,ビジネス,金融,医療,看護,福祉,デザイン,クリエイティブ,ファッション,ビューティー,建築,土木,フード,飲食,公務員,教育,自動車,機械,グローバル,国際,ブライダル,旅行">
+<meta name="viewport" content="width=640,user-scalable=no">
+<title>検索結果一覧 || 分野から探す || シゴト部</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="./javascript/motion.js"></script>
+<script type="text/javascript" src="./javascript/pulldown.js"></script>
+<script type="text/javascript" src="javascript/common.js"></script>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/common.css">
+</head>
 
-
-<html>
-	<head>
-		<link type="text/css" rel="stylesheet" href="./css/style.css">
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-		<script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
-		<script type="text/javascript" src="./javascript/motion.js"></script>
-
-		<title>検索結果一覧</title>
-
-	</head>
-
-	<body>
-		<header>
-			<div id="header">
-				<!--タイトル-->
-				<h1><img src="//シゴト部"></h1>
-
-				<!--メインメニュー-->
-				<a class="btn"></a>
-				<div class="drawr">
-    				<ul id="menu" style="list-style:none;">
-    				<li><a href="index.php">HOME</a></li>
-    				<li><a href="bunya.php">分野から探す</a></li>
-    				<li><a href="image.php">イメージから探す</a></li>
-    				<li><a href="gojyu.php">五十音から探す</a></li>
-    				<li><a href="ranking.php">気になるランキング</a></li>
-    				<li><a href="recently.php">最近気になった仕事</a></li>
-    				<li><form action="freewordSearch.php" method="POST"><input type="text" name="message" pattern='[^\\x22\\x27]*'  required><input type="submit"></form></li>
-    				</ul>
-			</div>
-
-<?php
-require_once 'DBmanager.php';
-
-
-//DB接続
-$con = connect();
-
-
-if (isset($_POST['image'])) {
-	//トップページからの値
-	$_SESSION['img'] = $_POST['image'];
-
-}
-
-
-if (isset($_SESSION['img'])) {
-	//トップページからの値
-	$tagid = $_SESSION['img'];
-
-	//タグ確認
-	$tagList = tagCheck($tagid);
-}
-
-
-?>
-
-
-			</div>
-		</header>
-
-	<main>
-		<div id="container">
+<body>
+	<?php include("header.html"); ?>
+		
+		<?php
+		require_once 'DBmanager.php';
+		
+		
+		//DB接続
+		$con = connect();
+		
+		
+		if (isset($_POST['image'])) {
+			//トップページからの値
+			$_SESSION['img'] = $_POST['image'];
+		
+		}
+		
+		
+		if (isset($_SESSION['img'])) {
+			//トップページからの値
+			$tagid = $_SESSION['img'];
+		
+			//タグ確認
+			$tagList = tagCheck($tagid);
+		}
+		
+		
+		?>
+		<div id="mainContent">
 			<div id="form_search">
 
 <?php
@@ -93,7 +73,11 @@ if (isset($_SESSION['img'])) {
 	echo '<select name="image">';
 
 	foreach ($imgResult as $value) {
-		echo '<option value="'.$value[0]./*タグID*/'">'.$value[1]./*タグ名*/'</option>';
+		if($tagid == $value[0]){
+			echo '<option value="'.$value[0]./*タグID*/'" selected>'.$value[1]./*タグ名*/'</option>';
+		}else{
+			echo '<option value="'.$value[0]./*タグID*/'">'.$value[1]./*タグ名*/'</option>';
+		}
 	}
 
 	echo '</select>';
@@ -256,10 +240,7 @@ for($i = $startPoint; $i < $endPoint; $i++){
 ?>
 
 			</div>
-		</main>
-
-<!--先頭に戻る-->
-<p id="page_top" style="display: block;"><a href="#wrap">トップ</a></p>
+		</div>
 
 <?php include("footer.html"); ?>
 </body>
