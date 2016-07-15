@@ -106,7 +106,9 @@ echo '検索結果'.$dataCount.'件';
 echo '</h2>';
 
 //１ページあたりの表示数
+//10件ずつ
 $perNum = 10;
+
 //最大ページ数
 $maxPageNum = ceil($dataCount / $perNum);
 
@@ -134,11 +136,11 @@ if($endPoint >= $dataCount){
 else{
 	$aaaa = 10;
 }
-	echo '(';
+	echo '<p>(';
 	echo $page;
 	echo '～';
 	echo $page + $aaaa - 1;
-	echo '件を表示)';
+	echo '件を表示)</p>';
 	echo '<br />';
 
 ?>
@@ -168,13 +170,10 @@ for($i = $startPoint; $i < $endPoint; $i++){
 		echo '<dt>';
 		echo '<a href="javascript:Form'.$i.'.submit()">'.$data[$i][1].'</a>';
 		echo '</dt>';
-		//矢印
-		echo '<dd>';
-		echo '<a href="javascript:Form'.$i.'.submit()"><img src=""></a>';
-		echo '</dd>';
-		echo '</form>';
 		//一言キャッチコピー
-		echo '<dd>'.$data[$i][2] .'</dd>';
+		echo '<dd>';
+		echo $data[$i][4];
+		echo '</dd>';
 		//アイコン
 		echo '<dd>';
 		echo '<ol>';
@@ -183,27 +182,41 @@ for($i = $startPoint; $i < $endPoint; $i++){
 		$stdnt1 = count($stdnt);
 
 		if (/*専門家*/$stdnt1 !== 0) {
-			echo '<li><img src="./"></li>';
+			echo '<li>';
+			echo '<img src="./">';
+			echo '</li>';
 		}
 
 		$exprt = expertnull($data[$i][0]);
 		$exprt1 = count($exprt);
 
 		if (/*学生*/ $exprt1 !== 0) {
-			echo '<li><img src="./"></li>';
+			echo '<li>';
+			echo '<img src="./">';
+			echo '</li>';
 		}
 
 		$wrkrp = workrpnull($data[$i][0]);
 		$wrkrp1 = count($wrkrp);
 
 		if (/*レポート*/$wrkrp1 !== 0) {
-			echo '<li><img src="./"></li>';
+			echo '<li>';
+			echo '<img src="./">';
+			echo '</li>';
 		}
-	}
 		echo '</ol>';
 		echo '</dd>';
+
+		//矢印
+		echo '<dd>';
+		echo '<a href="javascript:Form'.$i.'.submit()"><img src=""></a>';
+		echo '</dd>';
+
+		echo '</form>';
 		echo '</dl>';
 		echo '</div>';
+
+}
 		echo '</div>';
 
 		echo '<div id="list_page">';

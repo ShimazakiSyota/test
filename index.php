@@ -648,6 +648,7 @@ $b=1;
 	$b++;
 	echo "<form name='Form2".$b."' action='./subjectImageSearch.php' method ='POST'>";
 	echo "<li id=\"btn_z\">";
+echo $value[1];
 	echo "<input type='hidden' name='bunya' value=".$value[0].">";
 	echo "<a href='javascript:Form2".$b.".submit()'>";
 	echo "<img height='100' img src='./create_image.php?id=".$value[3]."' /></a>";
@@ -664,15 +665,25 @@ $b=1;
 	echo "<h3>イメージから探す</h3>";
 	echo "<ul>";
 	$ImageList = tagSelectAllKubun('2');
-	foreach( $ImageList as $value ){
+/*	foreach( $ImageList as $value ){
 	echo "<form action='./subjectImageSearch2.php' method = 'POST'>";
 	echo "<li>";
 	echo "<button type='submit' name='image' value='".$value[0]."'>".$value[1]."</button><br>";
 	echo "</li>";
-	}
+	}*/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+for ($j = 0; $j < 20; $j++) {
+	echo "<form action='./subjectImageSearch2.php' method = 'POST'>";
+	echo "<li>";
+	echo "<button type='submit' name='image' value='".$value[$j][0]."'>".$value[$j][1]."</button><br>";
+	echo "</li>";
+	echo "</form>";
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	echo "</ul>";
 	echo "</div>";
-	echo "</form>";
 
 	//フリーワード
 	echo "<div id=\"box_keyword\">";
